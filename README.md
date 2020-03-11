@@ -12,3 +12,7 @@ Mostly, this model is meant to alleviate some panic and also to explore compartm
 ## Model Details
 
 This will be filled in as I work on the model (if I chose to extend it more..)
+
+## Results
+
+![SIR](SIR.png)
