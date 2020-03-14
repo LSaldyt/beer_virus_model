@@ -1,0 +1,9 @@
+#!/usr/bin/env python
+
+import os, subprocess
+
+if os.path.isdir('COVID-19'):
+    os.chdir('COVID-19')
+    subprocess.call('git pull')
+else:
+    subprocess.call('git clone https://github.com/CSSEGISandData/COVID-19', shell=True)
