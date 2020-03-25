@@ -27,7 +27,7 @@ class SIRD_Model:
         dDdt = yeet * I
         return dSdt, dIdt, dRdt, dDdt
 
-    def plot(self, beta, gamma, yeet, duration=1000):
+    def plot(self, ax, beta, gamma, yeet, duration=1000, alpha=0.3, lw=0.8):
         # Contact rate, beta, and mean recovery rate, gamma, (in 1/days).
         # A grid of time points (in days)
         t = np.linspace(0, duration, duration)
@@ -41,22 +41,10 @@ class SIRD_Model:
         S, I, R, D = ret.T
 
         # Plot the data on three separate curves for S(t), I(t) and R(t)
-        fig = plt.figure(facecolor='w')
-        ax = fig.add_subplot(111, axisbelow=True)
-        ax.plot(t, S/self.population, 'b', alpha=0.5, lw=2, label='Susceptible')
-        ax.plot(t, I/self.population, 'r', alpha=0.5, lw=2, label='Infected')
-        ax.plot(t, R/self.population, 'g', alpha=0.5, lw=2, label='Recovered with immunity')
-        ax.plot(t, D/self.population, 'g', alpha=0.5, lw=2, label='Dead')
-        ax.set_xlabel('Time /days')
-        ax.set_ylabel('Population')
-        ax.yaxis.set_tick_params(length=0)
-        ax.xaxis.set_tick_params(length=0)
-        ax.grid(b=True, which='major', c='w', lw=2, ls='-')
-        legend = ax.legend()
-        legend.get_frame().set_alpha(0.5)
-        for spine in ('top', 'right', 'bottom', 'left'):
-            ax.spines[spine].set_visible(False)
-        plt.show()
+        ax.plot(t, S/self.population, 'b', alpha=alpha, lw=lw) # , label='Susceptible')
+        ax.plot(t, I/self.population, 'r', alpha=alpha, lw=lw) # , label='Infected')
+        ax.plot(t, R/self.population, 'g', alpha=alpha, lw=lw) # , label='Recovered with immunity')
+        ax.plot(t, D/self.population, 'k', alpha=alpha, lw=lw) # , label='Dead')
 
 def main():
     regions = read()
@@ -65,16 +53,24 @@ def main():
     pprint(params) 
 
     print('Beginning model..', flush=True)
-    # model = SIRD_Model(1200000, 13, 0, 0)
-    model = SIRD_Model(58000000, 444, 28, 17)
-    model.plot(params['infection_rate'], params['recovery_rate'], params['death_rate'])
-
-    totals = []
-    initial = 13
-    for inf_mult in params['confirmed_infection_rates']:
-        totals.append(initial)
-        initial = initial + initial * inf_mult
-    pprint(totals)
+    fig = plt.figure(facecolor='w')
+    ax = fig.add_subplot(111, axisbelow=True)
+    model = SIRD_Model(1200000, 13, 0, 0)
+    # model = SIRD_Model(58000000, 444, 28, 17)
+    for i in range(49, 150):
+        model.plot(ax, params['infection_rate'] * ((i+1)/100), params['recovery_rate'], params['death_rate'])
+    model.plot(ax, params['infection_rate'], params['recovery_rate'], params['death_rate'], alpha=1.0, lw=3)
+    ax.set_xlabel('Time /days')
+    ax.set_ylabel('Population')
+    ax.yaxis.set_tick_params(length=0)
+    ax.xaxis.set_tick_params(length=0)
+    ax.grid(b=True, which='major', c='w', lw=2, ls='-')
+    legend = ax.legend()
+    legend.get_frame().set_alpha(0.5)
+    for spine in ('top', 'right', 'bottom', 'left'):
+        ax.spines[spine].set_visible(False)
+    plt.show()
+    # model.plot(params['infection_rate'], params['naive_recovery_rate'], params['naive_death_rate'])
 
 
 if __name__ == '__main__':
