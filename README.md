@@ -15,4 +15,4 @@ This will be filled in as I work on the model (if I chose to extend it more..)
 
 ## Results
 
-![SIR](SIR.png)
+![SIR](model.png)
