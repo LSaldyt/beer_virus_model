@@ -91,7 +91,8 @@ def plot(df):
                                mapbox_style="carto-positron",
                                zoom=3, center = {"lat": 37.0902, "lon": -95.7129},
                                opacity=0.4,
-                               hover_data=['county', 'state', 'today', 'yesterday', 'two_days', 'delta', 'change_ratio', 'percent', 'percent_yesterday', 'percent_delta']
+                               hover_data=['county', 'state', 'today', 'yesterday', 'two_days', 'delta', 'change_ratio', 'percent', 'percent_yesterday', 'percent_delta'],
+                               labels = {'change_ratio' : 'Change in cases / total cases'}
                               )
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     fig.write_html('map.html', auto_open=True)
