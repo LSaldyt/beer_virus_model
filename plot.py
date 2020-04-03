@@ -94,6 +94,7 @@ def plot(df):
                                hover_data=['county', 'state', 'today', 'yesterday', 'two_days', 'delta', 'change_ratio', 'percent', 'percent_yesterday', 'percent_delta']
                               )
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    fig.write_html('map.html', auto_open=True)
     fig.show()
 
 def main():
