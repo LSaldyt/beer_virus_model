@@ -85,7 +85,7 @@ def transform():
 
 def plot(df):
     counties = load_counties()
-    fig = px.choropleth_mapbox(df, geojson=counties, locations='fips', color='custom',
+    fig = px.choropleth_mapbox(df, geojson=counties, locations='fips', color='change_ratio',
                                color_continuous_scale="Viridis",
                                range_color=(0, 2.0),
                                mapbox_style="carto-positron",
