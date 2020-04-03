@@ -1,4 +1,8 @@
-# Naive Compartmental COVID-19 model
+# COVID-19
+
+[See a map of Covid deltas in US counties](https://htmlpreview.github.io/?https://github.com/LSaldyt/corona_model/blob/master/map.html)
+
+## Compartmental Model
 Toy compartmental model of novel coronavirus, do not use for any serious purpose. 
 Initial code is based on this [book chapter](https://scipython.com/book/chapter-8-scipy/additional-examples/the-sir-epidemic-model/).
 
